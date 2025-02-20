@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Coldlandia/.vs/Coldlandia
+*.vcxproj
+*.filters
+*.user
+/Coldlandia/Coldlandia/x64/Debug
+*.dll
+/Coldlandia/x64/Debug
+*.sln
