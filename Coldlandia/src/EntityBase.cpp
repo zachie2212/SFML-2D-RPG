@@ -1,21 +1,31 @@
 #include "EntityBase.h"
+#include <iostream>
+
+EntityBase::EntityBase() : _texture("resources/textures/player/square.png"), _sprite(_texture)
+{
+}
+
+void EntityBase::load(std::string texture_path) {
+	pathInit(texture_path);
+
+	if (!_texture.loadFromFile(texture_path)) {
+		std::cout << "Failed to load Texture" << std::endl;
+	}
+	_texture.setRepeated(false);
+	_texture.setSmooth(true);
+	_sprite.setTexture(_texture);
+}
 
 void EntityBase::init(std::string texture_path)
 {
-	pathInit(texture_path);
-
-	_texture = sf::Texture(texture_path);
-	_sprite = sf::Sprite(_texture);
+	load(texture_path);
 	_hitbox = _sprite.getGlobalBounds();
 	_name = _texture_name;
 }
 
 void EntityBase::init(std::string texture_path, std::string name, sf::FloatRect hitbox)
 {
-	pathInit(texture_path);
-
-	_texture = sf::Texture(texture_path);
-	_sprite = sf::Sprite(_texture);
+	load(texture_path);
 	_hitbox = hitbox;
 	_name = name;
 }
@@ -41,6 +51,7 @@ void EntityBase::move(float amount, Direction direction)
 	case RIGHT:
 		_sprite.setPosition({ pos.x + amount, pos.y });
 	}
+	/*std::cout << "Sprite Position: (" << _sprite.getPosition().x << ", " << _sprite.getPosition().y << ")" << std::endl;*/
 }
 
 void EntityBase::pathInit(std::string texture_path)

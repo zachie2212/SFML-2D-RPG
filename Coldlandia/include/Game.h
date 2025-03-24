@@ -1,6 +1,9 @@
 #pragma once
 #include "Window.h"
 #include <iostream>
+#include <EntityBase.h>
+#include <EventManager.h>
+#include <SharedContext.h>
 
 class Game {
 public:
@@ -13,14 +16,11 @@ public:
 	sf::Time getElapsed();
 	void restartClock();
 
-	void moveSprite();
-
 	Window* getWindow();
 
 private:
-	Window _window;
 	//sf::Clock _clock;
 
-	sf::Texture _texture;
-	sf::Sprite _sprite;
+	EntityBase _e;
+	SharedContext _context;
 };

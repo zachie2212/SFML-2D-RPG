@@ -2,28 +2,29 @@
 
 const std::string title = "Coldlandia RPG";
 
-Game::Game() : _window(title, { 800, 600 }), 
-			_texture("resources/textures/player/asmund_single_sprite_v1.png"), 
-			_sprite(_texture)
+Game::Game()
 {
+	Window* win = new Window(title, { 800, 600 });
+	_context = SharedContext(win, new EventManager(win, &_e));
+	_e.init("resources/textures/player/asmund_single_sprite_v1.png");
 }
 
 Game::~Game()
 {
-	_window.close();
+	_context.window->close();
 }
 
 void Game::update()
 {
-	_window.update();
+	_context.event_manager->handleEvents();
 }
 
 void Game::render()
 {
-	_window.beginDraw();
+	_context.window->beginDraw();
 	// draw here
-	_window.getRenderWindow()->draw(_sprite);
-	_window.endDraw();
+	_e.draw(_context.window);
+	_context.window->endDraw();
 }
 
 sf::Time Game::getElapsed()
@@ -35,11 +36,7 @@ void Game::restartClock()
 {
 }
 
-void Game::moveSprite()
-{
-}
-
 Window* Game::getWindow()
 {
-	return &_window;
+	return _context.window;
 }

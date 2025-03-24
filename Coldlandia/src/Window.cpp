@@ -39,10 +39,12 @@ void Window::create()
 	auto style = sf::Style::Default;
 	auto state = _is_fullscreen ? sf::State::Fullscreen : sf::State::Windowed;
 	_window.create(sf::VideoMode(_window_size), _window_title, style, state);
+	_window.setVerticalSyncEnabled(true);
 }
 
 void Window::close()
 {
+	_is_done = true;
 	_window.close();
 }
 
@@ -55,25 +57,11 @@ bool Window::isFocused()
 }
 
 sf::RenderWindow* Window::getRenderWindow() { return &_window; }
+
 sf::Vector2u Window::getWindowSize() { return _window_size; }
 
 void Window::toggleFullscreen() {
 	_is_fullscreen = !_is_fullscreen;
 	_window.close();
 	create();
-}
-
-void Window::update() {
-	while (const std::optional event = _window.pollEvent()) {
-		if (event->is<sf::Event::Closed>()) { 
-			_is_done = true; 
-			continue;
-		}
-		if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-			if (keyPressed->scancode == sf::Keyboard::Scancode::F5) {
-				toggleFullscreen();
-			}
-			continue;
-		}
-	}
 }

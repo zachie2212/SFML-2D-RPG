@@ -13,8 +13,6 @@ public:
 	void beginDraw();
 	void endDraw();
 
-	void update();
-
 	bool isDone();
 	bool isFullscreen();
 	bool isFocused();
