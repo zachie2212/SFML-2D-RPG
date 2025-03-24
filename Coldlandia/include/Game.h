@@ -4,6 +4,7 @@
 #include <EntityBase.h>
 #include <EventManager.h>
 #include <SharedContext.h>
+#include <TileMap.h>
 
 class Game {
 public:
@@ -21,6 +22,7 @@ public:
 private:
 	//sf::Clock _clock;
 
+	TileMap _map;
 	EntityBase _e;
 	SharedContext _context;
 };
